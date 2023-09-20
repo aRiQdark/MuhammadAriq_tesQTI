@@ -69,7 +69,7 @@ class home extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   Text(
                     "Status",
