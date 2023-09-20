@@ -11,6 +11,7 @@ class approutes {
     GetPage(
         name: routename.Home,
         page: () => home(),
+        binding: authbinding(),
         transition: Transition.downToUp),
     GetPage(name: '/auth', page: () => Login(), binding: authbinding())
   ];

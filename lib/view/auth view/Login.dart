@@ -5,9 +5,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class Login extends GetView<authcontroller> {
- 
-final email = TextEditingController();
-final password = TextEditingController(); 
+  final email = TextEditingController();
+  final password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +78,28 @@ final password = TextEditingController();
               height: 70,
             ),
             InkWell(
-                onTap: () => controller.login(email.text, password.text),
+                onTap: () async {
+                  Map<String, dynamic>? loginResponse =
+                      await controller.login(email.text, password.text);
+// controller.handleLogin(email.text,password.text);
+                  String? token =
+                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MjQ0NzYwfQ.jXG9uKbVfHlHUiAOBh97apTQPKRgwgp1qLNzt6ZMPhs";
+
+                  if (token != null) {
+                    Map<String, dynamic>? profileData = await controller.getProfile(token);
+
+                    if (profileData != null) {
+                      print("berhasil");
+                      print('Profil Pengguna: $profileData');
+                    } else {
+                      // Tangani kesalahan saat mengambil profil pengguna
+                      print('Gagal mengambil data profil pengguna.');
+                    }
+                  } else {
+                    // Tangani kesalahan jika token null
+                    print('Token tidak tersedia.');
+                  }
+                },
                 child: Image.asset("assets/images/Button - Primary.png"))
           ],
         ),

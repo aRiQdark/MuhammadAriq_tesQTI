@@ -1,9 +1,6 @@
-import 'package:aplikasi_qti/view/Home/Home.dart';
 import 'package:aplikasi_qti/view/auth%20view/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'widget/bottomnavbar.dart';
 
 void main() {
   runApp(const MyApp());
