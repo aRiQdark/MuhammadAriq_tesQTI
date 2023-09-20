@@ -1,13 +1,17 @@
+import 'package:aplikasi_qti/controller/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Login extends GetView<authcontroller> {
+ 
+final email = TextEditingController();
+final password = TextEditingController(); 
 
   @override
   Widget build(BuildContext context) {
+    Get.put(authcontroller());
     return SafeArea(
       child: Scaffold(
         body: ListView(
@@ -42,6 +46,7 @@ class Login extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: TextField(
+                      controller: email,
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email),
                           border: InputBorder.none,
@@ -59,6 +64,7 @@ class Login extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: TextField(
+                      controller: password,
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
                           suffixIcon: Icon(Icons.remove_red_eye),
@@ -73,7 +79,7 @@ class Login extends StatelessWidget {
               height: 70,
             ),
             InkWell(
-                onTap: () => null,
+                onTap: () => controller.login(email.text, password.text),
                 child: Image.asset("assets/images/Button - Primary.png"))
           ],
         ),

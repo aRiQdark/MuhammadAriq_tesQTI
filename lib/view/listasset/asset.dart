@@ -115,7 +115,7 @@ class asset extends StatelessWidget {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),
-                              trailing: Text("data"),
+                              trailing: Image.asset("assets/icons/Button Trigger Only Icon.png"),
                             ),
                           );
                         },
