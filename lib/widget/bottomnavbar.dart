@@ -1,6 +1,6 @@
 import 'package:aplikasi_qti/view/Home/Home.dart';
 import 'package:aplikasi_qti/view/input/input_view.dart';
-import 'package:aplikasi_qti/view/tes.dart/asset.dart';
+import 'package:aplikasi_qti/view/listasset/asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
