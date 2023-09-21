@@ -83,7 +83,7 @@ class Login extends GetView<authcontroller> {
                       await controller.login(email.text, password.text);
 // controller.handleLogin(email.text,password.text);
                   String? token =
-                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MjQ0NzYwfQ.jXG9uKbVfHlHUiAOBh97apTQPKRgwgp1qLNzt6ZMPhs";
+                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MjcxMDgzfQ.Zllb65wvoRZTxd474XJ2UgCoL0D04vkomKmjhgQAFhI";
 
                   if (token != null) {
                     Map<String, dynamic>? profileData = await controller.getProfile(token);

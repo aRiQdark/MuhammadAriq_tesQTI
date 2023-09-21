@@ -155,4 +155,5 @@ class authcontroller extends GetxController {
       return null;
     }
   }
+  
 }

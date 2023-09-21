@@ -1,6 +1,8 @@
+import 'package:aplikasi_qti/Utils/Loadingpage.dart';
 import 'package:aplikasi_qti/controller/auth/auth.dart';
 import 'package:aplikasi_qti/models/Usermodel/users.dart';
 import 'package:aplikasi_qti/models/users.dart';
+import 'package:aplikasi_qti/view/Home/component/status_view.dart';
 import 'package:d_chart/commons/data_model.dart';
 import 'package:d_chart/ordinal/bar.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ import 'package:get/get.dart';
 
 class home extends GetView<authcontroller> {
   String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MjQ0NzYwfQ.jXG9uKbVfHlHUiAOBh97apTQPKRgwgp1qLNzt6ZMPhs";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MjcxMDgzfQ.Zllb65wvoRZTxd474XJ2UgCoL0D04vkomKmjhgQAFhI";
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +21,13 @@ class home extends GetView<authcontroller> {
       future: controller.getProfile(token!),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return LoadingPage();
         }
         if (!snapshot.hasData) {
-          return CircularProgressIndicator();
+          return LoadingPage();
         }
         Map<String, dynamic> userData = snapshot
-            .data; // Ini adalah _Map<String, dynamic> yang Anda terima dari respons API
-
-// Menggunakan data dari _Map<String, dynamic> untuk membuat objek Users
+            .data; 
         Users api = Users(
           id: userData['id'],
           email: userData['email'],
@@ -105,105 +105,16 @@ class home extends GetView<authcontroller> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
+
                       SizedBox(
                         height: 12,
                       ),
-                      Center(
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 9),
-                              height: 120,
-                              width: 117.3,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Asset \nSold",
-                                      style:
-                                          TextStyle(color: Color(0xff818896)),
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    Text(
-                                      "10",
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: 9),
-                              height: 120,
-                              width: 117.3,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Asset in \nStock",
-                                      style:
-                                          TextStyle(color: Color(0xff818896)),
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    Text(
-                                      "3",
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: 9),
-                              height: 120,
-                              width: 117.3,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Expired \nAsset",
-                                      style:
-                                          TextStyle(color: Color(0xff818896)),
-                                    ),
-                                    SizedBox(
-                                      height: 16,
-                                    ),
-                                    Text(
-                                      "5",
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                    Center(
+                      
+                      child: SizedBox(
+                        height: 150,
+                        
+                        child: status_view())),
                       SizedBox(
                         height: 12,
                       ),
