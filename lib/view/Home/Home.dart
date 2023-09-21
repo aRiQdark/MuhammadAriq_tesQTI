@@ -2,6 +2,8 @@ import 'package:aplikasi_qti/Utils/Loadingpage.dart';
 import 'package:aplikasi_qti/controller/auth/auth.dart';
 import 'package:aplikasi_qti/models/Usermodel/users.dart';
 import 'package:aplikasi_qti/models/users.dart';
+import 'package:aplikasi_qti/view/Home/component/location.dart';
+import 'package:aplikasi_qti/view/Home/component/location_chart.dart';
 import 'package:aplikasi_qti/view/Home/component/status_chart.dart';
 import 'package:aplikasi_qti/view/Home/component/status_view.dart';
 import 'package:d_chart/commons/data_model.dart';
@@ -133,107 +135,25 @@ class home extends GetView<authcontroller> {
                       SizedBox(
                         height: 16,
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 9),
-                            height: 83,
-                            width: 159,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Gudang",
-                                    style: TextStyle(
-                                        color: Color(0xff818896), fontSize: 16),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Text(
-                                    "8",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 9),
-                            height: 83,
-                            width: 159,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Rak Penjualan",
-                                    style: TextStyle(
-                                        color: Color(0xff818896), fontSize: 16),
-                                  ),
-                                  SizedBox(
-                                    height: 16,
-                                  ),
-                                  Text(
-                                    "10",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                      Center(
+                        child: SizedBox(
+                          height: 100,
+                          child: locationview()),
+                      ),
+                       SizedBox(
+                        height: 16,
+                      ),
+                        Text(
+                        "Chart",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       SizedBox(
                         height: 16,
                       ),
-                      Container(
-                        height: 350,
-                        width: 380,
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Chart"),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              AspectRatio(
-                                aspectRatio: 11 / 9,
-                                child: DChartBarO(
-                                  groupList: [
-                                    OrdinalGroup(
-                                      id: '1',
-                                      data: [
-                                        OrdinalData(
-                                            domain: 'Gudang', measure: 8),
-                                        OrdinalData(
-                                            domain: 'Rak Penjualan',
-                                            measure: 10),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      SizedBox(height: 380,
+                     child: locationchart(),
+                     ),
                     ],
                   ),
                 ),
