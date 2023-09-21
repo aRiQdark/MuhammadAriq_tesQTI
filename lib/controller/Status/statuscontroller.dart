@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class status extends GetxController {
   String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1Mjc2ODcwfQ.cQT4uA0BbUavLcW5SjMr9kTgXw1zrC4GzDnUPWwvEwg";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzEyNjc0fQ.G2iSD4Dsjb4TPSHieRrETB63oRTOYf95W8A1McCupY8";
 
   Future<List<Result>> fetchStatusData() async {
     final Uri url =

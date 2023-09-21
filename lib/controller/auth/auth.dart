@@ -98,14 +98,18 @@ class authcontroller extends GetxController {
 //     print('Gagal login.');
 //   }
 // }
-  Future<bool> logout() async {
+  Future<bool> logout(String token) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/logout');
-
+ final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
     // Kirim permintaan POST ke URL logout
-    final response = await http.post(url);
+    final response = await http.post(url,headers:headers );
     print(response.body);
     if (response.statusCode == 200) {
       Get.to(Login());
+      print("berhasil log out ${response.body}");
       return true;
     } else {
       return false;

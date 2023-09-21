@@ -2,6 +2,7 @@ import 'package:aplikasi_qti/Utils/Loadingpage.dart';
 import 'package:aplikasi_qti/controller/auth/auth.dart';
 import 'package:aplikasi_qti/models/Usermodel/users.dart';
 import 'package:aplikasi_qti/models/users.dart';
+import 'package:aplikasi_qti/view/Home/component/status_chart.dart';
 import 'package:aplikasi_qti/view/Home/component/status_view.dart';
 import 'package:d_chart/commons/data_model.dart';
 import 'package:d_chart/ordinal/bar.dart';
@@ -12,7 +13,7 @@ import 'package:get/get.dart';
 
 class home extends GetView<authcontroller> {
   String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MjcxMDgzfQ.Zllb65wvoRZTxd474XJ2UgCoL0D04vkomKmjhgQAFhI";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzEyNjc0fQ.G2iSD4Dsjb4TPSHieRrETB63oRTOYf95W8A1McCupY8";
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,7 @@ class home extends GetView<authcontroller> {
                               ],
                             ),
                             InkWell(
-                                onTap: () => controller.logout(),
+                                onTap: () => controller.logout(token!),
                                 child: Image.asset(
                                     "assets/icons/Button - Primary (1).png"))
                           ],
@@ -118,43 +119,9 @@ class home extends GetView<authcontroller> {
                       SizedBox(
                         height: 12,
                       ),
-                      Container(
-                        height: 350,
-                        width: 380,
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Chart"),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              AspectRatio(
-                                aspectRatio: 11 / 9,
-                                child: DChartBarO(
-                                  groupList: [
-                                    OrdinalGroup(
-                                      id: '1',
-                                      data: [
-                                        OrdinalData(
-                                            color: Color(0xff00B6AC),
-                                            domain: 'sold',
-                                            measure: 10),
-                                        OrdinalData(
-                                            domain: 'Stok', measure: 3.5),
-                                        OrdinalData(
-                                            domain: 'Expired', measure: 4.5),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                     SizedBox(height: 380,
+                     child: chart(),
+                     ),
                       SizedBox(
                         height: 16,
                       ),
