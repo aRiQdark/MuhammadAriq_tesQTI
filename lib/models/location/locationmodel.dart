@@ -45,12 +45,12 @@ class Result {
 }
 
 class LocationClass {
-    String? id;
-    String? name;
+    String id;
+    String name;
 
     LocationClass({
-         this.id,
-         this.name,
+        required this.id,
+        required this.name,
     });
 
     factory LocationClass.fromJson(Map<String, dynamic> json) => LocationClass(

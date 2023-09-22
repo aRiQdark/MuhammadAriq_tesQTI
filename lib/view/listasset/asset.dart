@@ -1,6 +1,7 @@
 import 'package:aplikasi_qti/Utils/Loadingpage.dart';
 import 'package:aplikasi_qti/controller/auth/auth.dart';
 import 'package:aplikasi_qti/models/users.dart';
+import 'package:aplikasi_qti/view/listasset/component/assetcomponen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -117,40 +118,9 @@ class asset extends GetView<authcontroller> {
                         SizedBox(
                           height: 8,
                         ),
-                        SizedBox(
-                          height: Get.height,
-                          child: ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                margin: EdgeInsets.only(top: 2),
-                                height: 65,
-                                width: 304,
-                                color: Colors.white,
-                                child: ListTile(
-                                  title: Text(
-                                    "Asset Name",
-                                    style: TextStyle(
-                                        color: Color(0xff818896), fontSize: 14),
-                                  ),
-                                  subtitle: Text(
-                                    "Susu Bendera",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
-                                  trailing: InkWell(
-                                    onTap: () {
-                                      Get.toNamed('/editpage');
-                                    },
-                                    child: Image.asset(
-                                        "assets/icons/Button Trigger Only Icon.png"),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                       SizedBox(
+                        height: Get.height,
+                        child: assetlsb())
                       ],
                     ))
               ],
