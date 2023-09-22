@@ -1,15 +1,19 @@
 import 'dart:convert';
 
+import 'package:aplikasi_qti/Routes/app_routes.dart';
 import 'package:aplikasi_qti/Routes/routename.dart';
 import 'package:aplikasi_qti/Utils/typedef.dart';
 import 'package:aplikasi_qti/models/Usermodel/users.dart';
 import 'package:aplikasi_qti/services/network/apiconstant.dart';
 import 'package:aplikasi_qti/view/Home/Home.dart';
 import 'package:aplikasi_qti/view/auth%20view/Login.dart';
+import 'package:aplikasi_qti/widget/bottomnavbar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class authcontroller extends GetxController {
+  RxBool passwordIsHidden = true.obs;
   Future<Stream<Map<String, dynamic>?>?> data() async {
     final url = Uri.parse('http://117.54.250.99:28089');
 
@@ -34,7 +38,11 @@ class authcontroller extends GetxController {
   }
 
   Future<Map<String, dynamic>?> login(String email, String password) async {
+
     final url = Uri.parse('http://117.54.250.99:28089/auth/login');
+
+
+
 
     // Buat objek data yang akan dikirimkan ke server dalam bentuk JSON
     final data = {
@@ -50,7 +58,7 @@ class authcontroller extends GetxController {
         await http.post(url, headers: headers, body: json.encode(data));
     print(response.body);
     if (response.statusCode == 200) {
-      Get.to(home());
+      Get.to(Bottomnavbar());
 
       final jsonResponse = json.decode(response.body);
       return jsonResponse;
@@ -100,15 +108,15 @@ class authcontroller extends GetxController {
 // }
   Future<bool> logout(String token) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/logout');
- final Map<String, String> headers = {
+    final Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
     };
-    // Kirim permintaan POST ke URL logout
-    final response = await http.post(url,headers:headers );
+
+    final response = await http.post(url, headers: headers);
     print(response.body);
     if (response.statusCode == 200) {
-      Get.to(Login());
+      Get.offAllNamed(routename.login);
       print("berhasil log out ${response.body}");
       return true;
     } else {
@@ -116,31 +124,33 @@ class authcontroller extends GetxController {
     }
   }
 
- Future<String?> fetchToken(String email, String password) async {
-  final url = Uri.parse('http://117.54.250.99:28089/auth/token');
+  Future<String?> fetchToken(String email, String password) async {
+    final url = Uri.parse('http://117.54.250.99:28089/auth/token');
 
-  final data = {
-    "username": email, 
-    "password": password,
-  };
+    final data = {
+      "username": email,
+      "password": password,
+    };
 
-  final headers = {
-    'Content-Type': 'application/json',
-  };
+    final headers = {
+      'Content-Type': 'application/json',
+    };
 
-  final response = await http.post(url, headers: headers, body: json.encode(data));
+    final response =
+        await http.post(url, headers: headers, body: json.encode(data));
 
-  if (response.statusCode == 200) {
-    final jsonResponse = json.decode(response.body);
-    final token = jsonResponse['token'] as String?;
-    return token;
-  } else {
-    // Tangani kesalahan jika permintaan tidak berhasil
-    print('Gagal mendapatkan token. Status Code: ${response.statusCode}');
-    print('Pesan kesalahan: ${response.body}');
-    return null;
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      final token = jsonResponse['token'] as String?;
+      return token;
+    } else {
+      // Tangani kesalahan jika permintaan tidak berhasil
+      print('Gagal mendapatkan token. Status Code: ${response.statusCode}');
+      print('Pesan kesalahan: ${response.body}');
+      return null;
+    }
   }
-}
+
   Future<Map<String, dynamic>?> getProfile(String token) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/me');
 
@@ -159,5 +169,4 @@ class authcontroller extends GetxController {
       return null;
     }
   }
-  
 }

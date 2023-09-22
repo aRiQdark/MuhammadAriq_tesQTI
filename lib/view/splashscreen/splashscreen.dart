@@ -8,7 +8,9 @@ class splashscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(),
+      body: Center(
+         child: Image.asset("assets/images/Vertical Logo=Black 1.png"),
+      ),
     );
   }
 }

@@ -1,11 +1,14 @@
 import 'dart:convert';
 
-import 'package:aplikasi_qti/models/status/status.dart';
+import 'package:aplikasi_qti/view/listasset/asset.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:aplikasi_qti/models/assets/modelasset.dart';
 
-class status extends GetxController {
-  String? token =
+class assetscontroller extends GetxController{
+
+
+String? token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzY2MzE5fQ.yL1BzgWWS4Kew0570tDlrGn-594Ny_qozdOToG7GTTg";
 
   Future<List<Result>> fetchStatusData() async {
@@ -47,4 +50,6 @@ class status extends GetxController {
       return [];
     }
   }
+
+
 }

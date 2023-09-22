@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 class locationController extends GetxController {
   String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzEyNjc0fQ.G2iSD4Dsjb4TPSHieRrETB63oRTOYf95W8A1McCupY8";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzY2MzE5fQ.yL1BzgWWS4Kew0570tDlrGn-594Ny_qozdOToG7GTTg";
 
   Future<List<Result>> LocationApi() async {
     final Uri url =
@@ -44,7 +44,7 @@ class locationController extends GetxController {
         return [];
       }
     } catch (e) {
-      // Handle any exceptions that occur during the request
+    
       print('Error fetching data: $e');
       return [];
     }

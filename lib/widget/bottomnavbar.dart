@@ -1,9 +1,11 @@
+import 'package:aplikasi_qti/Routes/routename.dart';
 import 'package:aplikasi_qti/view/Home/Home.dart';
 import 'package:aplikasi_qti/view/auth%20view/Login.dart';
 import 'package:aplikasi_qti/view/input/input_view.dart';
 import 'package:aplikasi_qti/view/listasset/asset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class Bottomnavbar extends StatelessWidget {
@@ -12,14 +14,11 @@ class Bottomnavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _buildscreen() {
-      return [
-       
-        home(), Input(), asset()];
+      return [home(), Input(), asset()];
     }
 
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
-     
         PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.home),
           title: "Home",

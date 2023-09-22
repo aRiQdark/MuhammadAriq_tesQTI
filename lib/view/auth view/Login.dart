@@ -1,4 +1,5 @@
 import 'package:aplikasi_qti/controller/auth/auth.dart';
+import 'package:aplikasi_qti/widget/primary_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -24,9 +25,32 @@ class Login extends GetView<authcontroller> {
                     width: 440,
                     fit: BoxFit.cover,
                   ),
-                  Image.asset(
-                    "assets/images/logo, title & body.png",
-                    width: 400,
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Image.asset(
+                        "assets/images/only logo buenno.png",
+                        width: 51,
+                      ),
+                      Text(
+                        "Welcome back!",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "You've been missed,",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      Text("Please sign in your account",
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ],
                   )
                 ],
               ),
@@ -44,13 +68,21 @@ class Login extends GetView<authcontroller> {
                       border: Border.all(color: Color(0xff88C1F4))),
                   child: Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: TextField(
-                      controller: email,
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.email),
-                          border: InputBorder.none,
-                          hintText: 'email'),
-                    ),
+                    child: PrimaryTextfield(
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          } else if (!RegExp(
+                                  "^[a-zA-Z0-9_.-]+@[a-zA-Z]+[.]+[a-z]")
+                              .hasMatch(value)) {
+                            return 'Please enter valid email';
+                          }
+                          return null;
+                        },
+                        controller: email,
+                        prefixIcon: Icon(Icons.email),
+                        hintText: 'email'),
                   ),
                 ),
                 Container(
@@ -61,16 +93,30 @@ class Login extends GetView<authcontroller> {
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(color: Color(0xff88C1F4))),
                   child: Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: TextField(
-                      controller: password,
-                      decoration: InputDecoration(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Obx(
+                        () => PrimaryTextfield(
+                          hintText: 'Password',
+                          controller: password,
+                          obscureText:
+                              controller.passwordIsHidden.value == true,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
                           prefixIcon: Icon(Icons.lock),
-                          suffixIcon: Icon(Icons.remove_red_eye),
-                          border: InputBorder.none,
-                          hintText: 'Password'),
-                    ),
-                  ),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              controller.passwordIsHidden.toggle();
+                            },
+                            icon: controller.passwordIsHidden.value == true
+                                ? const Icon(Icons.visibility_outlined)
+                                : const Icon(Icons.visibility_off_outlined),
+                          ),
+                        ),
+                      )),
                 )
               ],
             ),
@@ -81,12 +127,13 @@ class Login extends GetView<authcontroller> {
                 onTap: () async {
                   Map<String, dynamic>? loginResponse =
                       await controller.login(email.text, password.text);
-// controller.handleLogin(email.text,password.text);
+
                   String? token =
-                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MjcxMDgzfQ.Zllb65wvoRZTxd474XJ2UgCoL0D04vkomKmjhgQAFhI";
+                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzY2MzE5fQ.yL1BzgWWS4Kew0570tDlrGn-594Ny_qozdOToG7GTTg";
 
                   if (token != null) {
-                    Map<String, dynamic>? profileData = await controller.getProfile(token);
+                    Map<String, dynamic>? profileData =
+                        await controller.getProfile(token);
 
                     if (profileData != null) {
                       print("berhasil");

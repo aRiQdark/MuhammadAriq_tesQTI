@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 
 class home extends GetView<authcontroller> {
   String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzEyNjc0fQ.G2iSD4Dsjb4TPSHieRrETB63oRTOYf95W8A1McCupY8";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzY2MzE5fQ.yL1BzgWWS4Kew0570tDlrGn-594Ny_qozdOToG7GTTg";
 
   @override
   Widget build(BuildContext context) {
@@ -143,14 +143,8 @@ class home extends GetView<authcontroller> {
                        SizedBox(
                         height: 16,
                       ),
-                        Text(
-                        "Chart",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
+                      
+                     
                       SizedBox(height: 380,
                      child: locationchart(),
                      ),
