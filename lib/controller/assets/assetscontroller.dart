@@ -15,6 +15,8 @@ class assetscontroller extends GetxController {
      'c8179b05-6a77-41a3-a564-089b0bc323ff':'sold',
     'ddb92699-2f09-4c23-83dd-d0197107f757':'stock',
   }.obs;
+  List<String> selectedStatusList = ['Asset', 'Gudang', 'Stock'];
+ 
    Map<String, String> locationMap = {
      'aa104896-3f10-42cf-88d7-3a567961f8e4':'Gudang',
      'be1a090f-9f0e-446c-b0f9-8aee486ba0be':'Rak Penjualan',
@@ -103,7 +105,7 @@ class assetscontroller extends GetxController {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $token',
   };
-
+ String selectedStatusIDs = selectedStatusList.map((status) => statusMap[status]).join(',');
   // Buat objek data dalam format JSON
   Map<String, dynamic> postData = {
     'name': nama.text,
@@ -114,6 +116,37 @@ class assetscontroller extends GetxController {
   var response = await http.post(
     url,
     body: jsonEncode(postData), // Konversi data ke JSON
+    headers: headers,
+  );
+print(" ini diaaaaaaaaaaaaaaa${response.body}");
+  Get.back();
+
+  if (response.statusCode == 200) {
+    // Data was successfully added
+    print("Data added!");
+  } else {
+    // Error occurred
+    print("Error adding data: ${response.statusCode}");
+  }
+}
+ void updateasset(TextEditingController nama) async {
+  var url = Uri.parse("http://117.54.250.99:28089/asset/");
+  final Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
+
+ String selectedStatusIDs = selectedStatusList.map((status) => statusMap[status]).join(',');
+  // Buat objek data dalam format JSON
+  Map<String, dynamic> editData = {
+    'name': nama.text,
+    'location_id': selectedOptionlocation.value,
+    'status_id': selectedOptionstatus.value,
+  };
+
+  var response = await http.post(
+    url,
+    body: jsonEncode(editData), // Konversi data ke JSON
     headers: headers,
   );
 print(" ini diaaaaaaaaaaaaaaa${response.body}");

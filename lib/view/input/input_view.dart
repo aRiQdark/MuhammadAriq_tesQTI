@@ -151,7 +151,7 @@ class Input extends GetView<assetscontroller> {
               onTap: () {
                 
                 controller.postassets(inputnama);
-               
+                
               },
               child: Image.asset("assets/icons/Button - Primary (2).png"))
           ],
