@@ -26,7 +26,7 @@ class assetlsb extends GetView<assetscontroller> {
         }
         Get.lazyPut(() => assetscontroller());
 
-        return Column(
+        return ListView(
           children: [
             SizedBox(
               height: 8,

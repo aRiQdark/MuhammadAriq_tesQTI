@@ -147,7 +147,11 @@ class Login extends GetView<authcontroller> {
                     print('Token tidak tersedia.');
                   }
                 },
-                child: Image.asset("assets/images/Button - Primary.png"))
+                child: Image.asset("assets/images/Button - Primary.png")),
+
+                ElevatedButton(onPressed: () {
+                  controller.getToken();
+                }, child: Text("get token"))
           ],
         ),
       ),

@@ -39,11 +39,7 @@ class authcontroller extends GetxController {
   }
 
   Future<Map<String, dynamic>?> login(String email, String password) async {
-
     final url = Uri.parse('http://117.54.250.99:28089/auth/login');
-
-
-
 
     // Buat objek data yang akan dikirimkan ke server dalam bentuk JSON
     final data = {
@@ -125,32 +121,7 @@ class authcontroller extends GetxController {
     }
   }
 
-  Future<String?> fetchToken(String email, String password) async {
-    final url = Uri.parse('http://117.54.250.99:28089/auth/token');
 
-    final data = {
-      "username": email,
-      "password": password,
-    };
-
-    final headers = {
-      'Content-Type': 'application/json',
-    };
-
-    final response =
-        await http.post(url, headers: headers, body: json.encode(data));
-
-    if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-      final token = jsonResponse['token'] as String?;
-      return token;
-    } else {
-      // Tangani kesalahan jika permintaan tidak berhasil
-      print('Gagal mendapatkan token. Status Code: ${response.statusCode}');
-      print('Pesan kesalahan: ${response.body}');
-      return null;
-    }
-  }
 
   Future<Map<String, dynamic>?> getProfile(String token) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/me');
@@ -170,4 +141,38 @@ class authcontroller extends GetxController {
       return null;
     }
   }
+
+
+
+Future<void> getToken() async {
+  var url = Uri.parse("http://117.54.250.99:28089/auth/token");
+  final Map<String, String> headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  };
+
+  final Map<String, String> requestBody = {
+    'grant_type': 'password',
+    'username': 'Muhammad Ariq',
+    'password': 'ariq50470',
+    'scope': '', 
+    'client_id': '', 
+    'client_secret': '', 
+  };
+
+  var response = await http.post(
+    url,
+    body: Uri.encodeFull(Uri(queryParameters: requestBody).query),
+    headers: headers,
+  );
+
+  if (response.statusCode == 200) {
+    var responseData = jsonDecode(response.body);
+    var token = responseData['access_token'];
+    print("Token: $token");
+  } else {
+    print("Error: ${response.statusCode}");
+    print("Response: ${response.body}");
+  }
+}
+
 }

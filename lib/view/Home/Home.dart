@@ -151,6 +151,9 @@ class home extends GetView<authcontroller> {
                     ],
                   ),
                 ),
+
+              ElevatedButton(onPressed: () => Get.offAllNamed('/input'), child: Text("input")),
+          
               ],
             ),
           ),

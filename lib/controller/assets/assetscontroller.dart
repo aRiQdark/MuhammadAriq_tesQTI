@@ -24,8 +24,11 @@ class assetscontroller extends GetxController {
   // List<String> status = statusMap.keys.toList().obs;
   List<String> loactionlist = ['Gudang', 'Rak Penjualan'];
   List<String> statuslist = ['Asset', 'sold', "stock"];
+ 
   String? token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1Mzg5MjkxfQ.X6jjmZUe-QlKnh1RKHv31UWwqzWhU0S1O0lzLcsnnQo";
+
+
 
   Future<List<Result?>> getallasset() async {
     final Uri url = Uri.parse("http://117.54.250.99:28089/asset/");
@@ -105,8 +108,9 @@ class assetscontroller extends GetxController {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $token',
   };
- String selectedStatusIDs = selectedStatusList.map((status) => statusMap[status]).join(',');
+
   // Buat objek data dalam format JSON
+
   Map<String, dynamic> postData = {
     'name': nama.text,
     'location_id': selectedOptionlocation.value,
