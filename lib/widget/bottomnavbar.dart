@@ -26,8 +26,8 @@ class Bottomnavbar extends StatelessWidget {
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
-          icon: Icon(Icons.add),
-          activeColorPrimary: CupertinoColors.systemBlue,
+          icon: Icon(CupertinoIcons.add,color: Colors.white,),
+          activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(

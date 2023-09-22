@@ -8,8 +8,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class asset extends GetView<authcontroller> {
+  
   String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzY2MzE5fQ.yL1BzgWWS4Kew0570tDlrGn-594Ny_qozdOToG7GTTg";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1Mzg5MjkxfQ.X6jjmZUe-QlKnh1RKHv31UWwqzWhU0S1O0lzLcsnnQo";
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,9 @@ class asset extends GetView<authcontroller> {
                                 )
                               ],
                             ),
-                            Image.asset("assets/icons/Button - Primary (1).png")
+                            InkWell(
+                              onTap: () => controller.logout(token!),
+                              child: Image.asset("assets/icons/Button - Primary (1).png"))
                           ],
                         ),
                       ],
@@ -93,34 +96,7 @@ class asset extends GetView<authcontroller> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.normal),
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Center(
-                          child: Container(
-                            width: 380,
-                            height: 52,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Color(0xff88C1F4))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: TextField(
-                                controller: tes,
-                                decoration: InputDecoration(
-                                    suffixIcon: Icon(Icons.search_rounded),
-                                    border: InputBorder.none,
-                                    hintText: 'Search asset'),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                       SizedBox(
-                        height: Get.height,
-                        child: assetlsb())
+                        SizedBox(height: Get.height, child: assetlsb())
                       ],
                     ))
               ],

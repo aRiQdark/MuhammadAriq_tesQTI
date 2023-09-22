@@ -63,7 +63,7 @@ class Editasset extends StatelessWidget {
             SizedBox(
               height: 18,
             ),
-             Text(
+            Text(
               "Status",
               style: TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
             ),
@@ -87,7 +87,7 @@ class Editasset extends StatelessWidget {
             SizedBox(
               height: 18,
             ),
-             Text(
+            Text(
               "Location",
               style: TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
             ),
@@ -108,7 +108,9 @@ class Editasset extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 237,),
+            SizedBox(
+              height: 237,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,

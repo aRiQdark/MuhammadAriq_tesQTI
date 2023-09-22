@@ -1,12 +1,16 @@
+import 'package:aplikasi_qti/controller/assets/assetscontroller.dart';
+import 'package:aplikasi_qti/view/listasset/asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 
-class Input extends StatelessWidget {
-  const Input({super.key});
+class Input extends GetView<assetscontroller> {
+  final inputnama = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => assetscontroller());
     return Scaffold(
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
@@ -54,6 +58,7 @@ class Input extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(6.0),
                 child: TextField(
+                  controller: inputnama,
                   decoration: InputDecoration(
                       border: InputBorder.none, hintText: 'Input name'),
                 ),
@@ -62,7 +67,7 @@ class Input extends StatelessWidget {
             SizedBox(
               height: 18,
             ),
-             Text(
+            Text(
               "Status",
               style: TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
             ),
@@ -77,16 +82,32 @@ class Input extends StatelessWidget {
                   border: Border.all(color: Color(0xff88C1F4))),
               child: Padding(
                 padding: const EdgeInsets.all(6.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none, hintText: 'Select status'),
+                child: Obx(
+                  () => DropdownButton(
+                    disabledHint: null,
+                    isExpanded: true,
+                    hint: const Text('Select status'),
+                    value: controller.statuslist
+                            .contains(controller.selectedOptionstatus.value)
+                        ? controller.selectedOptionstatus.value
+                        : null,
+                    onChanged: (newValue) {
+                      controller.selectedOptionstatus.value = newValue!;
+                    },
+                    items: controller.statusMap.keys.map((option) {
+                      return DropdownMenuItem<String>(
+                        child: Text(option),
+                        value: option,
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ),
             SizedBox(
               height: 18,
             ),
-             Text(
+            Text(
               "Location",
               style: TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
             ),
@@ -101,14 +122,38 @@ class Input extends StatelessWidget {
                   border: Border.all(color: Color(0xff88C1F4))),
               child: Padding(
                 padding: const EdgeInsets.all(6.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none, hintText: 'Select location'),
+                child: Obx(
+                  () => DropdownButton(
+                    disabledHint: null,
+                    isExpanded: true,
+                    hint: const Text('Select location'),
+                    value: controller.loactionlist
+                            .contains(controller.selectedOptionlocation.value)
+                        ? controller.selectedOptionlocation.value
+                        : null,
+                    onChanged: (newValue) {
+                      controller.selectedOptionlocation.value = newValue!;
+                    },
+                    items: controller.locationMap.keys.map((option) {
+                      return DropdownMenuItem<String>(
+                        child: Text(option),
+                        value: option,
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 237,),
-            Image.asset("assets/icons/Button - Primary (2).png")
+            SizedBox(
+              height: 237,
+            ),
+            InkWell(
+              onTap: () {
+                
+                controller.postassets(inputnama);
+               
+              },
+              child: Image.asset("assets/icons/Button - Primary (2).png"))
           ],
         ),
       ),

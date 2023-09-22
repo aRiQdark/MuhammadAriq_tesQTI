@@ -15,6 +15,12 @@ class approutes {
   static const Splashscreen = '/splashscreen';
   static final routes = [
     GetPage(
+      name: '/bottomnavbar',
+      page: () {
+        return Bottomnavbar();
+      },
+    ),
+    GetPage(
         name: '/splashscreen',
         page: () => splashscreen(),
         binding: authbinding(),

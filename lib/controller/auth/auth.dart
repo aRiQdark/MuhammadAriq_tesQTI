@@ -7,6 +7,7 @@ import 'package:aplikasi_qti/models/Usermodel/users.dart';
 import 'package:aplikasi_qti/services/network/apiconstant.dart';
 import 'package:aplikasi_qti/view/Home/Home.dart';
 import 'package:aplikasi_qti/view/auth%20view/Login.dart';
+import 'package:aplikasi_qti/view/listasset/asset.dart';
 import 'package:aplikasi_qti/widget/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class authcontroller extends GetxController {
         await http.post(url, headers: headers, body: json.encode(data));
     print(response.body);
     if (response.statusCode == 200) {
-      Get.to(Bottomnavbar());
+      Get.offAllNamed("/bottomnavbar");
 
       final jsonResponse = json.decode(response.body);
       return jsonResponse;
