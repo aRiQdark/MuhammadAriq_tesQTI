@@ -43,6 +43,8 @@ dependencies:
   fluttertoast: ^8.2.2
   dropdown_button2: ^2.1.4
   instagram_bottom_nav_bar: ^3.0.17
+  curved_nav_bar: ^0.0.2
+  curved_navigation_bar: ^1.0.3
 
 dev_dependencies:
   flutter_test:

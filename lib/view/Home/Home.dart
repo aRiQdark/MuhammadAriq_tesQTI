@@ -84,7 +84,9 @@ class home extends GetView<authcontroller> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: Image.network(
-                                        "https://picsum.photos/400/400.jpg",fit: BoxFit.cover,),
+                                      "https://picsum.photos/400/400.jpg",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -100,7 +102,17 @@ class home extends GetView<authcontroller> {
                               ],
                             ),
                             InkWell(
-                                onTap: () => controller.logout(token),
+                                onTap: () => Get.defaultDialog(
+                                      title: 'Logout',
+                                      middleText:
+                                          'When you want to use this app,\n you have to relogin,are you sure?',
+                                      confirm: InkWell(
+                                        onTap: () => controller.logout(token),
+                                        child: Image.asset('assets/icons/logout-button.png')),
+                                    cancel: InkWell(
+                                      onTap: () => Get.back(),
+                                      child: Image.asset('assets/icons/cancel.png'))
+                                    ),
                                 child: Image.asset(
                                     "assets/icons/Button - Primary (1).png"))
                           ],
@@ -389,8 +401,10 @@ class home extends GetView<authcontroller> {
                     ],
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () => Get.to(Input()), child: Text("input")),
+                // ElevatedButton(
+                //     onPressed: () => Get.to(Input()), child: Text("input")),
+                //       ElevatedButton(
+                //     onPressed: () => Get.to(Input()), child: Text("edit")),
               ],
             ),
           ),

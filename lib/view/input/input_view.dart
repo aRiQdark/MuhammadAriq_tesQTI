@@ -7,16 +7,18 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class Input extends GetView<authcontroller> {
-  final inputnama = TextEditingController();
+
   
 
 
   @override
   Widget build(BuildContext context) {
+    Get.put(assetscontroller());
+      final inputnama = TextEditingController();
     final Controller = Get.find<assetscontroller>();
     Get.put(assetscontroller());
     var token = controller.token.value;
-    Get.lazyPut(() => assetscontroller());
+    
     return Scaffold(
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
@@ -156,7 +158,16 @@ class Input extends GetView<authcontroller> {
             InkWell(
               onTap: () {
                 Get.put(assetscontroller());
-                Controller.postassets(inputnama,token);
+                 Controller.postassets(inputnama,token);
+                Get.defaultDialog(
+                  title: '',
+                  content:Image.asset('assets/images/badge.png'),
+                textConfirm: 'Data has been submitted',
+                buttonColor: Colors.white,
+                confirmTextColor: Colors.black
+               
+                );
+               
                 
               },
               child: Image.asset("assets/icons/Button - Primary (2).png"))

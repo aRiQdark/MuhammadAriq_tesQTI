@@ -103,7 +103,7 @@ Get.lazyPut(()=>assetscontroller());
                         Text(
                           "List Asset",
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.normal),
+                              fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black),
                         ),
                         SizedBox(height: Get.height, child: FutureBuilder<List>(
       future: asset.getallasset(token),
@@ -129,8 +129,9 @@ Get.lazyPut(()=>assetscontroller());
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: Color(0xff88C1F4))),
                 child: Padding(
-                  padding: const EdgeInsets.all(6.0),
+                  padding: EdgeInsets.all(6.0),
                   child: TextField(
+                    controller: controller.find,
                     decoration: InputDecoration(
                         suffixIcon: Icon(Icons.search_rounded),
                         border: InputBorder.none,
@@ -164,6 +165,7 @@ Get.lazyPut(()=>assetscontroller());
                       subtitle: Text(
                         "${api?.name}",
                         style: TextStyle(
+                          color: Colors.black,
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       trailing: InkWell(

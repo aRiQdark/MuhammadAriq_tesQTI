@@ -11,22 +11,19 @@ class assetscontroller extends GetxController {
   var selectedOptionlocation = ''.obs;
   var selectedOptionstatus = ''.obs;
   Map<String, String> statusMap = {
-    'bd455ff3-1b85-4730-855c-5bf0018db2e5':'Assets',
-     'c8179b05-6a77-41a3-a564-089b0bc323ff':'sold',
-    'ddb92699-2f09-4c23-83dd-d0197107f757':'stock',
+    'bd455ff3-1b85-4730-855c-5bf0018db2e5': 'Assets',
+    'c8179b05-6a77-41a3-a564-089b0bc323ff': 'sold',
+    'ddb92699-2f09-4c23-83dd-d0197107f757': 'stock',
   }.obs;
   List<String> selectedStatusList = ['Asset', 'Gudang', 'Stock'];
- 
-   Map<String, String> locationMap = {
-     'aa104896-3f10-42cf-88d7-3a567961f8e4':'Gudang',
-     'be1a090f-9f0e-446c-b0f9-8aee486ba0be':'Rak Penjualan',
+
+  Map<String, String> locationMap = {
+    'aa104896-3f10-42cf-88d7-3a567961f8e4': 'Gudang',
+    'be1a090f-9f0e-446c-b0f9-8aee486ba0be': 'Rak Penjualan',
   }.obs;
   // List<String> status = statusMap.keys.toList().obs;
   List<String> loactionlist = ['Gudang', 'Rak Penjualan'];
   List<String> statuslist = ['Asset', 'sold', "stock"];
- 
-
-
 
   Future<List<assetResult?>> getallasset(String token) async {
     final Uri url = Uri.parse("http://117.54.250.99:28089/asset/");
@@ -65,7 +62,7 @@ class assetscontroller extends GetxController {
     }
   }
 
-  Future<List<assetResult?>> assetsearch(String query,String token) async {
+  Future<List<assetResult?>> assetsearch(String query, String token) async {
     try {
       final Uri url =
           Uri.parse("http://117.54.250.99:28089/asset/?search=$query");
@@ -85,8 +82,8 @@ class assetscontroller extends GetxController {
           if (resultData.isEmpty) {
             searchResults.clear();
           } else {
-            searchResults
-                .assignAll(resultData.map((e) => assetResult.fromJson(e)).toList());
+            searchResults.assignAll(
+                resultData.map((e) => assetResult.fromJson(e)).toList());
           }
         } else {
           print('Response does not contain the expected data structure');
@@ -100,68 +97,98 @@ class assetscontroller extends GetxController {
     return [];
   }
 
- void postassets(TextEditingController nama,String token) async {
-  var url = Uri.parse("http://117.54.250.99:28089/asset/");
-  final Map<String, String> headers = {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer $token',
-  };
+  void postassets(TextEditingController nama, String token) async {
+    var url = Uri.parse("http://117.54.250.99:28089/asset/");
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
 
-  // Buat objek data dalam format JSON
+    // Buat objek data dalam format JSON
 
-  Map<String, dynamic> postData = {
-    'name': nama.text,
-    'location_id': selectedOptionlocation.value,
-    'status_id': selectedOptionstatus.value,
-  };
+    Map<String, dynamic> postData = {
+      'name': nama.text,
+      'location_id': selectedOptionlocation.value,
+      'status_id': selectedOptionstatus.value,
+    };
 
-  var response = await http.post(
-    url,
-    body: jsonEncode(postData), // Konversi data ke JSON
-    headers: headers,
-  );
-print(" ini diaaaaaaaaaaaaaaa${response.body}");
-  Get.back();
+    var response = await http.post(
+      url,
+      body: jsonEncode(postData), // Konversi data ke JSON
+      headers: headers,
+    );
+    print(" ini diaaaaaaaaaaaaaaa${response.body}");
+    Get.back();
 
-  if (response.statusCode == 200) {
-    // Data was successfully added
-    print("Data added!");
-  } else {
-    // Error occurred
-    print("Error adding data: ${response.statusCode}");
+    if (response.statusCode == 200) {
+      // Data was successfully added
+      print("Data added!");
+    } else {
+      // Error occurred
+      print("Error adding data: ${response.statusCode}");
+    }
+  }
+
+  void updateasset(TextEditingController nama, String token) async {
+    var url = Uri.parse("http://117.54.250.99:28089/asset/");
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    String selectedStatusIDs =
+        selectedStatusList.map((status) => statusMap[status]).join(',');
+    // Buat objek data dalam format JSON
+    Map<String, dynamic> editData = {
+      'name': nama.text,
+      'location_id': selectedOptionlocation.value,
+      'status_id': selectedOptionstatus.value,
+    };
+
+    var response = await http.post(
+      url,
+      body: jsonEncode(editData), // Konversi data ke JSON
+      headers: headers,
+    );
+    print(" ini diaaaaaaaaaaaaaaa${response.body}");
+    Get.back();
+
+    if (response.statusCode == 200) {
+      // Data was successfully added
+      print("Data added!");
+    } else {
+      // Error occurred
+      print("Error adding data: ${response.statusCode}");
+    }
+  }
+
+Future<void> delete(String token, String id) async {
+  try {
+    final Uri url = Uri.parse("http://117.54.250.99:28089/asset/$id");
+    final Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    final response = await http.delete(url, headers: headers);
+
+    if (response.statusCode == 204) {
+      // Penghapusan berhasil tanpa respons konten
+      Get.back(); // Kembali ke halaman sebelumnya
+      print("Berhasil dihapus: ${response.statusCode}");
+    } else {
+      // Tangani kesalahan jika penghapusan gagal atau respons lain yang tidak diharapkan
+      print("Gagal menghapus: ${response.statusCode}");
+      // Anda juga bisa memunculkan pesan kesalahan
+      throw Exception("Gagal menghapus: ${response.statusCode}");
+    }
+  } catch (error) {
+    // Tangani kesalahan jika terjadi kesalahan lain selama penghapusan
+    print("Terjadi kesalahan: $error");
+    throw error;
   }
 }
- void updateasset(TextEditingController nama,String token)async {
-  var url = Uri.parse("http://117.54.250.99:28089/asset/");
-  final Map<String, String> headers = {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer $token',
-  };
-
- String selectedStatusIDs = selectedStatusList.map((status) => statusMap[status]).join(',');
-  // Buat objek data dalam format JSON
-  Map<String, dynamic> editData = {
-    'name': nama.text,
-    'location_id': selectedOptionlocation.value,
-    'status_id': selectedOptionstatus.value,
-  };
-
-  var response = await http.post(
-    url,
-    body: jsonEncode(editData), // Konversi data ke JSON
-    headers: headers,
-  );
-print(" ini diaaaaaaaaaaaaaaa${response.body}");
-  Get.back();
-
-  if (response.statusCode == 200) {
-    // Data was successfully added
-    print("Data added!");
-  } else {
-    // Error occurred
-    print("Error adding data: ${response.statusCode}");
-  }
-}
+//
 
   @override
   void onClose() {

@@ -1,13 +1,19 @@
+import 'package:aplikasi_qti/controller/assets/assetscontroller.dart';
+import 'package:aplikasi_qti/controller/auth/auth.dart';
+import 'package:aplikasi_qti/models/assets/modelasset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
-class Editasset extends StatelessWidget {
+class Editasset extends GetView<authcontroller> {
   const Editasset({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    final Controller = Get.find<assetscontroller>();
+    var token = controller.token.value;
     return Scaffold(
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
@@ -115,7 +121,13 @@ class Editasset extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/icons/Button Stroke.png"),
+                InkWell(
+                  onTap: () async {
+                   await Controller.delete(token,'e71c73a1-7316-45bc-a0aa-40f172ecfe01');
+                
+                print("ini coba coba $token");
+                  },
+                  child: Image.asset("assets/icons/Button Stroke.png")),
                 Image.asset("assets/icons/save_update.png"),
               ],
             )

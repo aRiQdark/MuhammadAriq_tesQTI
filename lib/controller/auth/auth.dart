@@ -17,7 +17,7 @@ import 'package:http/http.dart' as http;
 class authcontroller extends GetxController {
   RxBool passwordIsHidden = true.obs;
   var token = ''.obs;
-
+final find = TextEditingController();
   void setToken(String newToken) {
     token.value = newToken;
   }
@@ -140,5 +140,10 @@ Get.to(Bottomnavbar());
       // Tangani kesalahan jika permintaan tidak berhasil
       return null;
     }
+  }
+   @override
+  void dispose() {
+    find.dispose();
+    super.dispose();
   }
 }
