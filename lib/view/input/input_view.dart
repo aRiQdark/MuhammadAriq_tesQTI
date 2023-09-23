@@ -1,21 +1,27 @@
 import 'package:aplikasi_qti/controller/assets/assetscontroller.dart';
+import 'package:aplikasi_qti/controller/auth/auth.dart';
 import 'package:aplikasi_qti/view/listasset/asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
-class Input extends GetView<assetscontroller> {
+class Input extends GetView<authcontroller> {
   final inputnama = TextEditingController();
+  
+
 
   @override
   Widget build(BuildContext context) {
+    final Controller = Get.find<assetscontroller>();
+    Get.put(assetscontroller());
+    var token = controller.token.value;
     Get.lazyPut(() => assetscontroller());
     return Scaffold(
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () => null,
+            onPressed: () => Get.back(),
             icon: Icon(
               Icons.arrow_back_outlined,
               color: Colors.black,
@@ -87,14 +93,14 @@ class Input extends GetView<assetscontroller> {
                     disabledHint: null,
                     isExpanded: true,
                     hint: const Text('Select status'),
-                    value: controller.statuslist
-                            .contains(controller.selectedOptionstatus.value)
-                        ? controller.selectedOptionstatus.value
+                    value: Controller.statuslist
+                            .contains(Controller.selectedOptionstatus.value)
+                        ? Controller.selectedOptionstatus.value
                         : null,
                     onChanged: (newValue) {
-                      controller.selectedOptionstatus.value = newValue!;
+                      Controller.selectedOptionstatus.value = newValue!;
                     },
-                    items: controller.statusMap.keys.map((option) {
+                    items: Controller.statusMap.keys.map((option) {
                       return DropdownMenuItem<String>(
                         child: Text(option),
                         value: option,
@@ -127,14 +133,14 @@ class Input extends GetView<assetscontroller> {
                     disabledHint: null,
                     isExpanded: true,
                     hint: const Text('Select location'),
-                    value: controller.loactionlist
-                            .contains(controller.selectedOptionlocation.value)
-                        ? controller.selectedOptionlocation.value
+                    value: Controller.loactionlist
+                            .contains(Controller.selectedOptionlocation.value)
+                        ? Controller.selectedOptionlocation.value
                         : null,
                     onChanged: (newValue) {
-                      controller.selectedOptionlocation.value = newValue!;
+                      Controller.selectedOptionlocation.value = newValue!;
                     },
-                    items: controller.locationMap.keys.map((option) {
+                    items: Controller.locationMap.keys.map((option) {
                       return DropdownMenuItem<String>(
                         child: Text(option),
                         value: option,
@@ -149,8 +155,8 @@ class Input extends GetView<assetscontroller> {
             ),
             InkWell(
               onTap: () {
-                
-                controller.postassets(inputnama);
+                Get.put(assetscontroller());
+                Controller.postassets(inputnama,token);
                 
               },
               child: Image.asset("assets/icons/Button - Primary (2).png"))

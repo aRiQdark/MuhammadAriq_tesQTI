@@ -25,8 +25,6 @@ class assetscontroller extends GetxController {
   List<String> loactionlist = ['Gudang', 'Rak Penjualan'];
   List<String> statuslist = ['Asset', 'sold', "stock"];
  
-  String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1Mzg5MjkxfQ.X6jjmZUe-QlKnh1RKHv31UWwqzWhU0S1O0lzLcsnnQo";
 
 
 
@@ -67,7 +65,7 @@ class assetscontroller extends GetxController {
     }
   }
 
-  Future<List<assetResult?>> assetsearch(String query) async {
+  Future<List<assetResult?>> assetsearch(String query,String token) async {
     try {
       final Uri url =
           Uri.parse("http://117.54.250.99:28089/asset/?search=$query");
@@ -102,7 +100,7 @@ class assetscontroller extends GetxController {
     return [];
   }
 
- void postassets(TextEditingController nama) async {
+ void postassets(TextEditingController nama,String token) async {
   var url = Uri.parse("http://117.54.250.99:28089/asset/");
   final Map<String, String> headers = {
     'Content-Type': 'application/json',
@@ -133,7 +131,7 @@ print(" ini diaaaaaaaaaaaaaaa${response.body}");
     print("Error adding data: ${response.statusCode}");
   }
 }
- void updateasset(TextEditingController nama) async {
+ void updateasset(TextEditingController nama,String token)async {
   var url = Uri.parse("http://117.54.250.99:28089/asset/");
   final Map<String, String> headers = {
     'Content-Type': 'application/json',

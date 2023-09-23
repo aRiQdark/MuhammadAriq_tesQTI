@@ -80,7 +80,13 @@ class home extends GetView<authcontroller> {
                           children: [
                             Row(
                               children: [
-                                CircleAvatar(),
+                                CircleAvatar(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.network(
+                                        "https://picsum.photos/400/400.jpg",fit: BoxFit.cover,),
+                                  ),
+                                ),
                                 SizedBox(
                                   width: 10,
                                 ),
@@ -384,8 +390,7 @@ class home extends GetView<authcontroller> {
                   ),
                 ),
                 ElevatedButton(
-                    onPressed: () => Get.to(Input()),
-                    child: Text("input")),
+                    onPressed: () => Get.to(Input()), child: Text("input")),
               ],
             ),
           ),

@@ -81,7 +81,7 @@ class authcontroller extends GetxController {
   Future<Map<String, dynamic>?> login(String email, String password) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/login');
 
-    // Buat objek data yang akan dikirimkan ke server dalam bentuk JSON
+   
     final data = {
       "email": email,
       "password": password,
