@@ -9,14 +9,14 @@ Location locationFromJson(String str) => Location.fromJson(json.decode(str));
 String locationToJson(Location data) => json.encode(data.toJson());
 
 class Location {
-    List<Result> results;
+    List<LocationResult> results;
 
     Location({
         required this.results,
     });
 
     factory Location.fromJson(Map<String, dynamic> json) => Location(
-        results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+        results: List<LocationResult>.from(json["results"].map((x) => LocationResult.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -24,16 +24,16 @@ class Location {
     };
 }
 
-class Result {
+class LocationResult {
     LocationClass? location;
     int? count;
 
-    Result({
+    LocationResult({
          this.location,
          this.count,
     });
 
-    factory Result.fromJson(Map<String, dynamic> json) => Result(
+    factory LocationResult.fromJson(Map<String, dynamic> json) => LocationResult(
         location: LocationClass.fromJson(json["location"]),
         count: json["count"],
     );

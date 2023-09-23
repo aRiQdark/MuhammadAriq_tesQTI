@@ -1,5 +1,7 @@
 import 'package:aplikasi_qti/Utils/Loadingpage.dart';
+import 'package:aplikasi_qti/controller/assets/assetscontroller.dart';
 import 'package:aplikasi_qti/controller/auth/auth.dart';
+import 'package:aplikasi_qti/models/assets/modelasset.dart';
 import 'package:aplikasi_qti/models/users.dart';
 import 'package:aplikasi_qti/view/listasset/component/assetcomponen.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +10,15 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class asset extends GetView<authcontroller> {
-  String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1Mzg5MjkxfQ.X6jjmZUe-QlKnh1RKHv31UWwqzWhU0S1O0lzLcsnnQo";
-
+ 
   @override
   Widget build(BuildContext context) {
+
+    final asset = Get.find<assetscontroller>();
+      var token = controller.token.value;
     final tes = TextEditingController();
     return FutureBuilder(
-      future: controller.getProfile(token!),
+      future: controller.getProfile(token),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return LoadingPage();
@@ -34,6 +37,7 @@ class asset extends GetView<authcontroller> {
         return SafeArea(
           child: Scaffold(
             body: ListView(
+              physics: NeverScrollableScrollPhysics(),
               children: [
                 Container(
                   width: Get.width,
@@ -77,7 +81,7 @@ class asset extends GetView<authcontroller> {
                               ],
                             ),
                             InkWell(
-                              onTap: () => controller.logout(token!),
+                              onTap: () => controller.logout(token),
                               child: Image.asset("assets/icons/Button - Primary (1).png"))
                           ],
                         ),
@@ -95,7 +99,84 @@ class asset extends GetView<authcontroller> {
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.normal),
                         ),
-                        SizedBox(height: Get.height, child: assetlsb())
+                        SizedBox(height: Get.height, child: FutureBuilder<List>(
+      future: asset.getallasset(token),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return LoadingPage();
+        }
+        if (!snapshot.hasData) {
+          return CircularProgressIndicator();
+        }
+        Get.lazyPut(() => assetscontroller());
+
+        return ListView(
+          children: [
+            SizedBox(
+              height: 8,
+            ),
+            Center(
+              child: Container(
+                width: 380,
+                height: 52,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Color(0xff88C1F4))),
+                child: Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        suffixIcon: Icon(Icons.search_rounded),
+                        border: InputBorder.none,
+                        hintText: 'Search asset'),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+              height: 2000,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: snapshot.data?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  
+                  assetResult? api = snapshot.data?[index];
+                  return Container(
+                    margin: EdgeInsets.only(top: 2),
+                    height: 65,
+                    width: 304,
+                    color: Colors.white,
+                    child: ListTile(
+                      title: Text(
+                        "Asset Name",
+                        style:
+                            TextStyle(color: Color(0xff818896), fontSize: 14),
+                      ),
+                      subtitle: Text(
+                        "${api?.name}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      trailing: InkWell(
+                        onTap: () {
+                          Get.toNamed('/editpage');
+                          // Get.offAllNamed('/editpage');
+                        },
+                        child: Image.asset(
+                            "assets/icons/Button Trigger Only Icon.png"),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    ))
                       ],
                     ))
               ],

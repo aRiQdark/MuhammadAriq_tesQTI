@@ -13,7 +13,7 @@ class Asstes {
     int pageCount;
     int pageSize;
     int page;
-    List<Result> results;
+    List<assetResult> results;
 
     Asstes({
         required this.count,
@@ -28,7 +28,7 @@ class Asstes {
         pageCount: json["page_count"],
         pageSize: json["page_size"],
         page: json["page"],
-        results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+        results: List<assetResult>.from(json["results"].map((x) => assetResult.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -40,16 +40,16 @@ class Asstes {
     };
 }
 
-class Result {
+class assetResult {
     String id;
     String name;
 
-    Result({
+    assetResult({
         required this.id,
         required this.name,
     });
 
-    factory Result.fromJson(Map<String, dynamic> json) => Result(
+    factory assetResult.fromJson(Map<String, dynamic> json) => assetResult(
         id: json["id"],
         name: json["name"],
     );

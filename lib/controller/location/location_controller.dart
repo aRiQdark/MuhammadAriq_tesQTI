@@ -7,10 +7,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class locationController extends GetxController {
-  String? token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1Mzg5NDkwfQ.QCpVHDt5VtYO0NizxpMAB7ODzOFbrNhgIBceoh4Jvjo";
-
-  Future<List<Result>> LocationApi() async {
+ 
+  Future<List<LocationResult>> LocationApi(String token) async {
     final Uri url =
         Uri.parse("http://117.54.250.99:28089/home/agg-asset-by-location/");
     final Map<String, String> headers = {
@@ -31,7 +29,7 @@ class locationController extends GetxController {
           if (resultData.isEmpty) {
             return [];
           } else {
-            return resultData.map((e) => Result.fromJson(e)).toList();
+            return resultData.map((e) => LocationResult.fromJson(e)).toList();
           }
         } else {
           

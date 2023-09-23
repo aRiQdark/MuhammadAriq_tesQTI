@@ -8,6 +8,7 @@ import 'package:aplikasi_qti/services/network/apiconstant.dart';
 import 'package:aplikasi_qti/view/Home/Home.dart';
 import 'package:aplikasi_qti/view/auth%20view/Login.dart';
 import 'package:aplikasi_qti/view/listasset/asset.dart';
+import 'package:aplikasi_qti/widget/bottomnav1.dart';
 import 'package:aplikasi_qti/widget/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,45 @@ import 'package:http/http.dart' as http;
 
 class authcontroller extends GetxController {
   RxBool passwordIsHidden = true.obs;
+  var token = ''.obs;
+
+  void setToken(String newToken) {
+    token.value = newToken;
+  }
+
+  Future<void> getToken() async {
+    var url = Uri.parse("http://117.54.250.99:28089/auth/token");
+    final Map<String, String> headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+
+    final Map<String, String> requestBody = {
+      'grant_type': 'password',
+      'username': 'Muhammad Ariq',
+      'password': 'ariq50470',
+      'scope': '',
+      'client_id': '',
+      'client_secret': '',
+    };
+
+    var response = await http.post(
+      url,
+      body: Uri.encodeFull(Uri(queryParameters: requestBody).query),
+      headers: headers,
+    );
+
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+      var token = responseData['access_token'];
+      print("Token: $token");
+      setToken(token);
+      print(response.body);
+    } else {
+      print("Error: ${response.statusCode}");
+      print("Response: ${response.body}");
+    }
+  }
+
   Future<Stream<Map<String, dynamic>?>?> data() async {
     final url = Uri.parse('http://117.54.250.99:28089');
 
@@ -55,8 +95,8 @@ class authcontroller extends GetxController {
         await http.post(url, headers: headers, body: json.encode(data));
     print(response.body);
     if (response.statusCode == 200) {
-      Get.offAllNamed("/bottomnavbar");
-
+      Get.toNamed('/bottomnavbar');
+Get.to(Bottomnavbar());
       final jsonResponse = json.decode(response.body);
       return jsonResponse;
     } else {
@@ -65,44 +105,6 @@ class authcontroller extends GetxController {
     }
   }
 
-// Future<String?> login(String email, String password) async {
-//   final url = Uri.parse('http://117.54.250.99:28089/auth/login');
-
-//   final data = {
-//     "email": email,
-//     "password": password,
-//   };
-
-//   final headers = {
-//     'Content-Type': 'application/json',
-//   };
-
-//   final response =
-//       await http.post(url, headers: headers, body: json.encode(data));
-
-//   if (response.statusCode == 200) {
-//     final jsonResponse = json.decode(response.body);
-//     final token = jsonResponse['token'] as String?;
-//     return token; // Mengembalikan token setelah login berhasil
-//   } else {
-//     Get.defaultDialog(middleText: 'gagal');
-//     return null;
-//   }
-// }
-// Future<void> handleLogin(String Email,String Password) async {
-//   String? email = Email; // Ganti dengan email pengguna yang valid
-//   String? password = Password; // Ganti dengan password pengguna yang valid
-
-//   Map<String, dynamic>? token = (await login(email, password)) ;
-
-//   if (token != null) {
-//     // Jika login berhasil, lanjutkan untuk melakukan sesuatu dengan token
-//     print('Berhasil login. Token: $token');
-//   } else {
-//     // Tangani kesalahan saat login
-//     print('Gagal login.');
-//   }
-// }
   Future<bool> logout(String token) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/logout');
     final Map<String, String> headers = {
@@ -121,14 +123,12 @@ class authcontroller extends GetxController {
     }
   }
 
-
-
   Future<Map<String, dynamic>?> getProfile(String token) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/me');
 
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token', // Menggunakan token untuk otentikasi
+      'Authorization': 'Bearer $token',
     };
 
     final response = await http.get(url, headers: headers);
@@ -141,38 +141,4 @@ class authcontroller extends GetxController {
       return null;
     }
   }
-
-
-
-Future<void> getToken() async {
-  var url = Uri.parse("http://117.54.250.99:28089/auth/token");
-  final Map<String, String> headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-  };
-
-  final Map<String, String> requestBody = {
-    'grant_type': 'password',
-    'username': 'Muhammad Ariq',
-    'password': 'ariq50470',
-    'scope': '', 
-    'client_id': '', 
-    'client_secret': '', 
-  };
-
-  var response = await http.post(
-    url,
-    body: Uri.encodeFull(Uri(queryParameters: requestBody).query),
-    headers: headers,
-  );
-
-  if (response.statusCode == 200) {
-    var responseData = jsonDecode(response.body);
-    var token = responseData['access_token'];
-    print("Token: $token");
-  } else {
-    print("Error: ${response.statusCode}");
-    print("Response: ${response.body}");
-  }
-}
-
 }

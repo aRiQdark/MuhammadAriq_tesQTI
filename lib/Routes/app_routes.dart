@@ -21,16 +21,17 @@ class approutes {
       },
     ),
     GetPage(
+        name: '/home',
+        page: () => home(),
+        binding: authbinding(),
+        transition: Transition.downToUp),
+    GetPage(
         name: '/splashscreen',
         page: () => splashscreen(),
         binding: authbinding(),
         transition: Transition.downToUp),
     GetPage(name: routename.login, page: () => Login(), binding: authbinding()),
-    GetPage(
-        name: routename.Home,
-        page: () => Bottomnavbar(),
-        binding: authbinding(),
-        transition: Transition.downToUp),
+
     GetPage(
       name: '/input',
       page: () => Input(),

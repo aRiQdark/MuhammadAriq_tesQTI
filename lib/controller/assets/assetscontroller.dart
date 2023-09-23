@@ -7,7 +7,7 @@ import 'package:aplikasi_qti/models/assets/modelasset.dart';
 
 class assetscontroller extends GetxController {
   final TextEditingController searchController = TextEditingController();
-  final RxList<Result> searchResults = <Result>[].obs;
+  final RxList<assetResult> searchResults = <assetResult>[].obs;
   var selectedOptionlocation = ''.obs;
   var selectedOptionstatus = ''.obs;
   Map<String, String> statusMap = {
@@ -30,7 +30,7 @@ class assetscontroller extends GetxController {
 
 
 
-  Future<List<Result?>> getallasset() async {
+  Future<List<assetResult?>> getallasset(String token) async {
     final Uri url = Uri.parse("http://117.54.250.99:28089/asset/");
     final Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ class assetscontroller extends GetxController {
           if (resultData.isEmpty) {
             return [];
           } else {
-            return resultData.map((e) => Result.fromJson(e)).toList();
+            return resultData.map((e) => assetResult.fromJson(e)).toList();
           }
         } else {
           print('Response does not contain the expected data structure');
@@ -67,7 +67,7 @@ class assetscontroller extends GetxController {
     }
   }
 
-  Future<List<Result?>> assetsearch(String query) async {
+  Future<List<assetResult?>> assetsearch(String query) async {
     try {
       final Uri url =
           Uri.parse("http://117.54.250.99:28089/asset/?search=$query");
@@ -88,7 +88,7 @@ class assetscontroller extends GetxController {
             searchResults.clear();
           } else {
             searchResults
-                .assignAll(resultData.map((e) => Result.fromJson(e)).toList());
+                .assignAll(resultData.map((e) => assetResult.fromJson(e)).toList());
           }
         } else {
           print('Response does not contain the expected data structure');

@@ -11,6 +11,7 @@ class Login extends GetView<authcontroller> {
 
   @override
   Widget build(BuildContext context) {
+    var token = controller.token.value;
     Get.put(authcontroller());
     return SafeArea(
       child: Scaffold(
@@ -125,33 +126,36 @@ class Login extends GetView<authcontroller> {
             ),
             InkWell(
                 onTap: () async {
+                  controller.getToken();
                   Map<String, dynamic>? loginResponse =
                       await controller.login(email.text, password.text);
+                        controller.getProfile(token);
+                  
+                  // String? token =
+                  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzY2MzE5fQ.yL1BzgWWS4Kew0570tDlrGn-594Ny_qozdOToG7GTTg";
 
-                  String? token =
-                      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmMWJmZWNkLThlYTUtNGVjZi04MzBiLWFlNzk4ZjMwYjljNSIsInVzZXJuYW1lIjoiYXJpcUBxdGkudGVzdC5jb20iLCJlbWFpbCI6ImFyaXFAcXRpLnRlc3QuY29tIiwiZXhwIjoxNjk1MzY2MzE5fQ.yL1BzgWWS4Kew0570tDlrGn-594Ny_qozdOToG7GTTg";
+                  // if (token != null) {
+                  //   Map<String, dynamic>? profileData =
+                        
 
-                  if (token != null) {
-                    Map<String, dynamic>? profileData =
-                        await controller.getProfile(token);
-
-                    if (profileData != null) {
-                      print("berhasil");
-                      print('Profil Pengguna: $profileData');
-                    } else {
-                      // Tangani kesalahan saat mengambil profil pengguna
-                      print('Gagal mengambil data profil pengguna.');
-                    }
-                  } else {
-                    // Tangani kesalahan jika token null
-                    print('Token tidak tersedia.');
-                  }
+                  //   if (profileData != null) {
+                  //     print("berhasil");
+                  //     print('Profil Pengguna: $profileData');
+                  //   } else {
+                  //     // Tangani kesalahan saat mengambil profil pengguna
+                  //     print('Gagal mengambil data profil pengguna.');
+                  //   }
+                  // } else {
+                  //   // Tangani kesalahan jika token null
+                  //   print('Token tidak tersedia.');
+                  // }
                 },
                 child: Image.asset("assets/images/Button - Primary.png")),
-
-                ElevatedButton(onPressed: () {
+            ElevatedButton(
+                onPressed: () {
                   controller.getToken();
-                }, child: Text("get token"))
+                },
+                child: Text("get token"))
           ],
         ),
       ),
