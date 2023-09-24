@@ -167,24 +167,23 @@ class Editasset extends GetView<authcontroller> {
                               middleText:
                                   'Your action will cause this data\npermanently deleted',
                               confirm: InkWell(
-                                  onTap: () =>
-                                      Controller.delete(token, index.id),
+                                  onTap: () {
+                                    Controller.delete(token, index.id);
+                                    
+                                  },
                                   child: Image.asset(
-                                      'assets/icons/logout-button.png')),
+                                      'assets/icons/Button - Primary(6).png')),
                               cancel: InkWell(
                                   onTap: () => Get.back(),
                                   child:
                                       Image.asset('assets/icons/cancel.png')));
                           child:
                           Image.asset("assets/icons/Button - Primary (1).png");
-
-                        
                         },
                         child: Image.asset("assets/icons/Button Stroke.png")),
                     InkWell(
                         onTap: () async {
                           await Controller.edit(token, index.id, inputnama);
-                         
                         },
                         child: Image.asset("assets/icons/save_update.png")),
                   ],

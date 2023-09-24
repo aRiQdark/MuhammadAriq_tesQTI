@@ -17,7 +17,7 @@ import 'package:http/http.dart' as http;
 class authcontroller extends GetxController {
   RxBool passwordIsHidden = true.obs;
   var token = ''.obs;
-final find = TextEditingController();
+  final find = TextEditingController();
 
   void setToken(String newToken) {
     token.value = newToken;
@@ -82,7 +82,6 @@ final find = TextEditingController();
   Future<Map<String, dynamic>?> login(String email, String password) async {
     final url = Uri.parse('http://117.54.250.99:28089/auth/login');
 
-   
     final data = {
       "email": email,
       "password": password,
@@ -95,24 +94,18 @@ final find = TextEditingController();
     final response =
         await http.post(url, headers: headers, body: json.encode(data));
     print(response.body);
-     if (email == data.isEmpty) {
-        Get.defaultDialog(
-          title: '',
-          middleText: 'Invalid email');
-      }
-      if ( password == data.isEmpty) {
-        Get.defaultDialog(
-          title: '',
-          middleText: 'Invalid email');
-      }
+    if (email == data.isEmpty) {
+      Get.defaultDialog(title: '', middleText: 'Invalid email');
+    }
+    if (password == data.isEmpty) {
+      Get.defaultDialog(title: '', middleText: 'Invalid email');
+    }
     if (response.statusCode == 200) {
-      Get.toNamed('/bottomnavbar');
-Get.to(Bottomnavbar());
+      // Get.toNamed('/bottomnavbar');
+      Get.to(home());
       final jsonResponse = json.decode(response.body);
       return jsonResponse;
     } else {
-     
-     
       return null;
     }
   }
@@ -153,7 +146,8 @@ Get.to(Bottomnavbar());
       return null;
     }
   }
-   @override
+
+  @override
   void dispose() {
     find.dispose();
     super.dispose();

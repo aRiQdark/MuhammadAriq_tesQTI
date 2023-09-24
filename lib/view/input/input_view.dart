@@ -20,6 +20,49 @@ class Input extends GetView<authcontroller> {
     var token = controller.token.value;
     
     return Scaffold(
+       bottomNavigationBar: Container(
+              height: 80,
+              width: Get.width,
+              decoration: BoxDecoration(color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 36, right: 36),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(8)),
+                      child: IconButton(
+                          onPressed: () => Get.toNamed('/home'),
+                          icon: Icon(Icons.home)),
+                    ),
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(8)),
+                      child: IconButton(
+                          onPressed: () => Get.toNamed('/input'),
+                          icon: Icon(Icons.add)),
+                    ),
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(8)),
+                      child: IconButton(
+                          onPressed: () => Get.toNamed("/list-asset"),
+                          icon: Icon(Icons.account_balance)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
         leading: IconButton(

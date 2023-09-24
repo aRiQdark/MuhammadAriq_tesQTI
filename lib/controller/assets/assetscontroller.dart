@@ -118,7 +118,7 @@ class assetscontroller extends GetxController {
       headers: headers,
     );
     print(" ini diaaaaaaaaaaaaaaa${response.body}");
-    Get.back();
+    
 
     if (response.statusCode == 200) {
       // Data was successfully added
@@ -138,7 +138,7 @@ class assetscontroller extends GetxController {
 
     String selectedStatusIDs =
         selectedStatusList.map((status) => statusMap[status]).join(',');
-    // Buat objek data dalam format JSON
+   
     Map<String, dynamic> editData = {
       'name': nama.text,
       'location_id': selectedOptionlocation.value,
@@ -147,7 +147,7 @@ class assetscontroller extends GetxController {
 
     var response = await http.post(
       url,
-      body: jsonEncode(editData), // Konversi data ke JSON
+      body: jsonEncode(editData), 
       headers: headers,
     );
     print(" ini diaaaaaaaaaaaaaaa${response.body}");
@@ -173,57 +173,23 @@ class assetscontroller extends GetxController {
       final response = await http.delete(url, headers: headers);
 
       if (response.statusCode == 204) {
-        // Penghapusan berhasil tanpa respons konten
-        Get.back(); // Kembali ke halaman sebelumnya
+      
+        Get.toNamed('/list-asset'); 
         print("Berhasil dihapus: ${response.statusCode}");
       } else {
-        // Tangani kesalahan jika penghapusan gagal atau respons lain yang tidak diharapkan
+      
         print("Gagal menghapus: ${response.statusCode}");
-        // Anda juga bisa memunculkan pesan kesalahan
+      
         throw Exception("Gagal menghapus: ${response.statusCode}");
       }
     } catch (error) {
-      // Tangani kesalahan jika terjadi kesalahan lain selama penghapusan
+    
       print("Terjadi kesalahan: $error");
-      throw error;
+     
     }
   }
 
-  // Future<void> Edit(
-  //     String token, String id, TextEditingController inputname) async {
-  //   try {
-  //     final Uri url = Uri.parse("http://117.54.250.99:28089/asset/$id");
-  //     final Map<String, String> headers = {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer $token',
-  //     };
-  //     Map<String, dynamic> editdata = {
-  //       'name': inputname.text,
-  //       'location_id': selectedOptionlocation.value,
-  //       'status_id': selectedOptionstatus.value,
-  //     };
-  //     final response =
-  //         await http.put(url, headers: headers, body: jsonEncode(editdata));
 
-  //     if (response.statusCode == 204) {
-  //       Get.defaultDialog(
-  //           title: '',
-  //           content: Image.asset('assets/images/badge.png'),
-  //           textConfirm: 'Data has been submitted',
-  //           buttonColor: Colors.white,
-  //           confirmTextColor: Colors.black);
-  //       print("Berhasil didiedit: ${response.statusCode}");
-  //     } else {
-  //       print("Gagal edit: ${response.statusCode}");
-
-  //       throw Exception("Gagal edit: ${response.statusCode}");
-  //     }
-  //   } catch (error) {
-  //     print("Terjadi kesalahan: $error");
-  //     throw error;
-  //   }
-  // }
-//
   Future<void> edit(
       String token, String id, TextEditingController inputname) async {
     try {

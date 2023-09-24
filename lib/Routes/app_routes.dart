@@ -14,12 +14,12 @@ class approutes {
   static const login = routename.login;
   static const Splashscreen = '/splashscreen';
   static final routes = [
-    GetPage(
-      name: '/bottomnavbar',
-      page: () {
-        return Bottomnavbar();
-      },
-    ),
+    // GetPage(
+    //   name: '/bottomnavbar',
+    //   page: () {
+    //     return Bottomnavbar();
+    //   },
+    // ),
     GetPage(
         name: '/home',
         page: () => home(),
