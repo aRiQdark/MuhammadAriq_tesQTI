@@ -93,7 +93,7 @@ class Editasset extends GetView<authcontroller> {
                     padding: const EdgeInsets.all(6.0),
                     child: Obx(
                       () => DropdownButton(
-                        disabledHint: null,
+                       
                         isExpanded: true,
                         hint: const Text('Select status'),
                         value: Controller.statuslist
@@ -103,8 +103,8 @@ class Editasset extends GetView<authcontroller> {
                         onChanged: (newValue) {
                           Controller.selectedOptionstatus.value = newValue!;
                         },
-                        items: Controller.statusMap.keys.map((option) {
-                          return DropdownMenuItem<String>(
+                        items: Controller.statusMap.map((option) {
+                          return DropdownMenuItem(
                             child: Text(option),
                             value: option,
                           );

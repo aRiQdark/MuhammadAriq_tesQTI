@@ -145,7 +145,7 @@ class Input extends GetView<authcontroller> {
                     onChanged: (newValue) {
                       Controller.selectedOptionstatus.value = newValue!;
                     },
-                    items: Controller.statusMap.keys.map((option) {
+                    items: Controller.statusMap.map((option) {
                       return DropdownMenuItem<String>(
                         child: Text(option),
                         value: option,

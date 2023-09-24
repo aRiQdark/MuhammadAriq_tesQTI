@@ -10,11 +10,12 @@ class assetscontroller extends GetxController {
   final RxList<assetResult> searchResults = <assetResult>[].obs;
   var selectedOptionlocation = ''.obs;
   var selectedOptionstatus = ''.obs;
-  Map<String, String> statusMap = {
-    'bd455ff3-1b85-4730-855c-5bf0018db2e5': 'Assets',
-    'c8179b05-6a77-41a3-a564-089b0bc323ff': 'sold',
-    'ddb92699-2f09-4c23-83dd-d0197107f757': 'stock',
-  }.obs;
+  List<String> statusMap = [
+    'bd455ff3-1b85-4730-855c-5bf0018db2e5',
+    'c8179b05-6a77-41a3-a564-089b0bc323ff',
+    'ddb92699-2f09-4c23-83dd-d0197107f757',
+  ];
+
   List<String> selectedStatusList = ['Asset', 'Gudang', 'Stock'];
 
   Map<String, String> locationMap = {
@@ -118,7 +119,6 @@ class assetscontroller extends GetxController {
       headers: headers,
     );
     print(" ini diaaaaaaaaaaaaaaa${response.body}");
-    
 
     if (response.statusCode == 200) {
       // Data was successfully added
@@ -136,8 +136,6 @@ class assetscontroller extends GetxController {
       'Authorization': 'Bearer $token',
     };
 
-    String selectedStatusIDs =
-        selectedStatusList.map((status) => statusMap[status]).join(',');
    
     Map<String, dynamic> editData = {
       'name': nama.text,
@@ -147,7 +145,7 @@ class assetscontroller extends GetxController {
 
     var response = await http.post(
       url,
-      body: jsonEncode(editData), 
+      body: jsonEncode(editData),
       headers: headers,
     );
     print(" ini diaaaaaaaaaaaaaaa${response.body}");
@@ -173,22 +171,17 @@ class assetscontroller extends GetxController {
       final response = await http.delete(url, headers: headers);
 
       if (response.statusCode == 204) {
-      
-        Get.toNamed('/list-asset'); 
+        Get.toNamed('/list-asset');
         print("Berhasil dihapus: ${response.statusCode}");
       } else {
-      
         print("Gagal menghapus: ${response.statusCode}");
-      
+
         throw Exception("Gagal menghapus: ${response.statusCode}");
       }
     } catch (error) {
-    
       print("Terjadi kesalahan: $error");
-     
     }
   }
-
 
   Future<void> edit(
       String token, String id, TextEditingController inputname) async {
@@ -207,7 +200,6 @@ class assetscontroller extends GetxController {
           await http.put(url, headers: headers, body: jsonEncode(editData));
 
       if (response.statusCode == 204) {
-      
         print("Berhasil didiedit: ${response.statusCode}");
       } else {
         print("Gagal edit: ${response.statusCode}");
@@ -215,13 +207,14 @@ class assetscontroller extends GetxController {
         throw Exception("Gagal edit: ${response.statusCode}");
       }
     } catch (error) {
-        Get.defaultDialog(
-          title: '',
-          content: Image.asset('assets/images/badge.png'),
-          textConfirm: 'Data has been submitted',
-          buttonColor: Colors.white,
-          confirmTextColor: Colors.black,
-        );
+      Get.defaultDialog(
+        title: '',
+        content: Image.asset('assets/images/badge.png'),
+        textConfirm: 'Data has been submitted',
+        buttonColor: Colors.white,
+        confirmTextColor: Colors.black,
+      );
+      Get.toNamed('/list-asset');
       print("Terjadi kesalahan: $error");
     }
   }
