@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: approutes.routes,
       initialRoute:
-          _isUserLoggedIn() ? approutes.Beranda : approutes.Splashscreen,
+        '/splashscreen',
           
     );
   }

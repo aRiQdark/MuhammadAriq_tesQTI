@@ -20,16 +20,17 @@ class approutes {
     //     return Bottomnavbar();
     //   },
     // ),
+     GetPage(
+        name: '/splashscreen',
+        page: () => splashscreen(),
+        binding: authbinding(),
+        transition: Transition.downToUp),
     GetPage(
         name: '/home',
         page: () => home(),
         binding: authbinding(),
         transition: Transition.downToUp),
-    GetPage(
-        name: '/splashscreen',
-        page: () => splashscreen(),
-        binding: authbinding(),
-        transition: Transition.downToUp),
+   
     GetPage(name: routename.login, page: () => Login(), binding: authbinding()),
 
     GetPage(
