@@ -1,16 +1,17 @@
-# aplikasi_qti
+cara installasi
+-buka link ini https://drive.google.com/drive/u/0/folders/1jFvJgGve4ldoa0vtjIYYXTB_QjEXqLDp lalu pilih base apk
+-mulai lakukan install
 
-A new Flutter project.
 
-## Getting Started
+Muhammad Ariq Pratama 
+Log in apk hanya menggunakan:
+- email: ariq@qti.test.com
+- password:ariq50470
 
-This project is a starting point for a Flutter application.
+Ketika log in aplikasi dan setelah masuk ke menu beranda terus menerus loading maka melakukan log in ulang 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. ini page log in dari aplikasi dimana user harus memasukkan email dan password
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img align="left" alt="coding" width="400" src="https://github.com/aRiQdark/MuhammadAriq_tesQTI/blob/master/lib/Screenshot_1695538659.png?raw=true">
+
