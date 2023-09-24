@@ -95,13 +95,24 @@ final find = TextEditingController();
     final response =
         await http.post(url, headers: headers, body: json.encode(data));
     print(response.body);
+     if (email == data.isEmpty) {
+        Get.defaultDialog(
+          title: '',
+          middleText: 'Invalid email');
+      }
+      if ( password == data.isEmpty) {
+        Get.defaultDialog(
+          title: '',
+          middleText: 'Invalid email');
+      }
     if (response.statusCode == 200) {
       Get.toNamed('/bottomnavbar');
 Get.to(Bottomnavbar());
       final jsonResponse = json.decode(response.body);
       return jsonResponse;
     } else {
-      Get.defaultDialog(middleText: 'gagal');
+     
+     
       return null;
     }
   }

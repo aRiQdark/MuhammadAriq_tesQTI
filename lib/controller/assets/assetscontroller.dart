@@ -162,33 +162,103 @@ class assetscontroller extends GetxController {
     }
   }
 
-Future<void> delete(String token, String id) async {
-  try {
-    final Uri url = Uri.parse("http://117.54.250.99:28089/asset/$id");
-    final Map<String, String> headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
+  Future<void> delete(String token, String id) async {
+    try {
+      final Uri url = Uri.parse("http://117.54.250.99:28089/asset/$id");
+      final Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      };
 
-    final response = await http.delete(url, headers: headers);
+      final response = await http.delete(url, headers: headers);
 
-    if (response.statusCode == 204) {
-      // Penghapusan berhasil tanpa respons konten
-      Get.back(); // Kembali ke halaman sebelumnya
-      print("Berhasil dihapus: ${response.statusCode}");
-    } else {
-      // Tangani kesalahan jika penghapusan gagal atau respons lain yang tidak diharapkan
-      print("Gagal menghapus: ${response.statusCode}");
-      // Anda juga bisa memunculkan pesan kesalahan
-      throw Exception("Gagal menghapus: ${response.statusCode}");
+      if (response.statusCode == 204) {
+        // Penghapusan berhasil tanpa respons konten
+        Get.back(); // Kembali ke halaman sebelumnya
+        print("Berhasil dihapus: ${response.statusCode}");
+      } else {
+        // Tangani kesalahan jika penghapusan gagal atau respons lain yang tidak diharapkan
+        print("Gagal menghapus: ${response.statusCode}");
+        // Anda juga bisa memunculkan pesan kesalahan
+        throw Exception("Gagal menghapus: ${response.statusCode}");
+      }
+    } catch (error) {
+      // Tangani kesalahan jika terjadi kesalahan lain selama penghapusan
+      print("Terjadi kesalahan: $error");
+      throw error;
     }
-  } catch (error) {
-    // Tangani kesalahan jika terjadi kesalahan lain selama penghapusan
-    print("Terjadi kesalahan: $error");
-    throw error;
   }
-}
+
+  // Future<void> Edit(
+  //     String token, String id, TextEditingController inputname) async {
+  //   try {
+  //     final Uri url = Uri.parse("http://117.54.250.99:28089/asset/$id");
+  //     final Map<String, String> headers = {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $token',
+  //     };
+  //     Map<String, dynamic> editdata = {
+  //       'name': inputname.text,
+  //       'location_id': selectedOptionlocation.value,
+  //       'status_id': selectedOptionstatus.value,
+  //     };
+  //     final response =
+  //         await http.put(url, headers: headers, body: jsonEncode(editdata));
+
+  //     if (response.statusCode == 204) {
+  //       Get.defaultDialog(
+  //           title: '',
+  //           content: Image.asset('assets/images/badge.png'),
+  //           textConfirm: 'Data has been submitted',
+  //           buttonColor: Colors.white,
+  //           confirmTextColor: Colors.black);
+  //       print("Berhasil didiedit: ${response.statusCode}");
+  //     } else {
+  //       print("Gagal edit: ${response.statusCode}");
+
+  //       throw Exception("Gagal edit: ${response.statusCode}");
+  //     }
+  //   } catch (error) {
+  //     print("Terjadi kesalahan: $error");
+  //     throw error;
+  //   }
+  // }
 //
+  Future<void> edit(
+      String token, String id, TextEditingController inputname) async {
+    try {
+      final Uri url = Uri.parse("http://117.54.250.99:28089/asset/${id}");
+      final Map<String, String> headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${token}',
+      };
+      Map<String, dynamic> editData = {
+        'name': inputname.text,
+        'location_id': selectedOptionlocation.value,
+        'status_id': selectedOptionstatus.value,
+      };
+      final response =
+          await http.put(url, headers: headers, body: jsonEncode(editData));
+
+      if (response.statusCode == 204) {
+      
+        print("Berhasil didiedit: ${response.statusCode}");
+      } else {
+        print("Gagal edit: ${response.statusCode}");
+        print("Response body: ${response.body}");
+        throw Exception("Gagal edit: ${response.statusCode}");
+      }
+    } catch (error) {
+        Get.defaultDialog(
+          title: '',
+          content: Image.asset('assets/images/badge.png'),
+          textConfirm: 'Data has been submitted',
+          buttonColor: Colors.white,
+          confirmTextColor: Colors.black,
+        );
+      print("Terjadi kesalahan: $error");
+    }
+  }
 
   @override
   void onClose() {

@@ -402,13 +402,13 @@ class home extends GetView<authcontroller> {
                     ],
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      print("Nama ini ${api.username}");
-                    },
-                    child: Text("input")),
-                ElevatedButton(
-                    onPressed: () => Get.to(Input()), child: Text("edit")),
+                // ElevatedButton(
+                //     onPressed: () {
+                //       print("Nama ini ${api.username}");
+                //     },
+                //     child: Text("input")),
+                // ElevatedButton(
+                //     onPressed: () => Get.to(Input()), child: Text("edit")),
               ],
             ),
           ),

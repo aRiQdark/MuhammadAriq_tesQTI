@@ -11,6 +11,7 @@ class Login extends GetView<authcontroller> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     var token = controller.token.value;
     Get.put(authcontroller());
     return SafeArea(
@@ -71,12 +72,12 @@ class Login extends GetView<authcontroller> {
                     padding: const EdgeInsets.all(6.0),
                     child: PrimaryTextfield(
                         keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
+                        validator: (email) {
+                          if (email == null || email.isEmpty) {
                             return 'Please enter your email';
                           } else if (!RegExp(
                                   "^[a-zA-Z0-9_.-]+@[a-zA-Z]+[.]+[a-z]")
-                              .hasMatch(value)) {
+                              .hasMatch(email)) {
                             return 'Please enter valid email';
                           }
                           return null;
@@ -127,6 +128,11 @@ class Login extends GetView<authcontroller> {
             InkWell(
                 onTap: () async {
                   controller.getToken();
+
+                  if (email.text.isEmpty && password.text.isEmpty) {
+                    Get.defaultDialog(
+                        title: '', middleText: 'This form is required');
+                  }
                   controller.login(email.text, password.text);
                   controller.getProfile(token);
                 },
