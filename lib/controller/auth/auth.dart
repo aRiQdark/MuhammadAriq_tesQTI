@@ -18,6 +18,7 @@ class authcontroller extends GetxController {
   RxBool passwordIsHidden = true.obs;
   var token = ''.obs;
 final find = TextEditingController();
+
   void setToken(String newToken) {
     token.value = newToken;
   }

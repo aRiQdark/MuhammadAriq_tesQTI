@@ -1,9 +1,11 @@
 import 'package:aplikasi_qti/controller/assets/assetscontroller.dart';
 import 'package:aplikasi_qti/controller/auth/auth.dart';
 import 'package:aplikasi_qti/models/assets/modelasset.dart';
+import 'package:aplikasi_qti/models/status/status.dart';
+import 'package:aplikasi_qti/view/listasset/asset.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
 
 class Editasset extends GetView<authcontroller> {
@@ -11,7 +13,8 @@ class Editasset extends GetView<authcontroller> {
 
   @override
   Widget build(BuildContext context) {
-    
+
+    final assetResult index = Get.arguments;
     final Controller = Get.find<assetscontroller>();
     var token = controller.token.value;
     return Scaffold(
@@ -31,7 +34,12 @@ class Editasset extends GetView<authcontroller> {
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
-      body: Padding(
+      body: FutureBuilder(
+        future: Controller.getallasset(token),
+        
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+           
+          return Padding(
         padding: const EdgeInsets.all(22.0),
         child: ListView(
           children: [
@@ -123,9 +131,10 @@ class Editasset extends GetView<authcontroller> {
               children: [
                 InkWell(
                   onTap: () async {
-                   await Controller.delete(token,'e71c73a1-7316-45bc-a0aa-40f172ecfe01');
-                
-                print("ini coba coba $token");
+                    
+                   await Controller.delete(token,index.id);
+                // print("ini dia : ${index.id}");
+                // print("ini coba coba $token");
                   },
                   child: Image.asset("assets/icons/Button Stroke.png")),
                 Image.asset("assets/icons/save_update.png"),
@@ -133,6 +142,8 @@ class Editasset extends GetView<authcontroller> {
             )
           ],
         ),
+      );
+        },
       ),
     );
   }

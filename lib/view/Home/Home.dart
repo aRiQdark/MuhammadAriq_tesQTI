@@ -103,16 +103,17 @@ class home extends GetView<authcontroller> {
                             ),
                             InkWell(
                                 onTap: () => Get.defaultDialog(
-                                      title: 'Logout',
-                                      middleText:
-                                          'When you want to use this app,\n you have to relogin,are you sure?',
-                                      confirm: InkWell(
+                                    title: 'Logout',
+                                    middleText:
+                                        'When you want to use this app,\n you have to relogin,are you sure?',
+                                    confirm: InkWell(
                                         onTap: () => controller.logout(token),
-                                        child: Image.asset('assets/icons/logout-button.png')),
+                                        child: Image.asset(
+                                            'assets/icons/logout-button.png')),
                                     cancel: InkWell(
-                                      onTap: () => Get.back(),
-                                      child: Image.asset('assets/icons/cancel.png'))
-                                    ),
+                                        onTap: () => Get.back(),
+                                        child: Image.asset(
+                                            'assets/icons/cancel.png'))),
                                 child: Image.asset(
                                     "assets/icons/Button - Primary (1).png"))
                           ],
@@ -401,10 +402,13 @@ class home extends GetView<authcontroller> {
                     ],
                   ),
                 ),
-                // ElevatedButton(
-                //     onPressed: () => Get.to(Input()), child: Text("input")),
-                //       ElevatedButton(
-                //     onPressed: () => Get.to(Input()), child: Text("edit")),
+                ElevatedButton(
+                    onPressed: () {
+                      print("Nama ini ${api.username}");
+                    },
+                    child: Text("input")),
+                ElevatedButton(
+                    onPressed: () => Get.to(Input()), child: Text("edit")),
               ],
             ),
           ),

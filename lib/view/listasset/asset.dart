@@ -170,7 +170,7 @@ Get.lazyPut(()=>assetscontroller());
                       ),
                       trailing: InkWell(
                         onTap: () {
-                          Get.toNamed('/editpage');
+                          Get.toNamed('/editpage',arguments: api);
                           // Get.offAllNamed('/editpage');
                         },
                         child: Image.asset(
